@@ -1,0 +1,10 @@
+Module Program
+   Sub Main(argsn As String())
+     Dim num1, num2, suma As integer
+     Console.WriteLine("Ingrese el primer numero")
+     num1 = Integer.Parse(Console.ReadLine())
+     Console.WriteLine("Ingrese el segundo numero")
+     num2 = Integer.Parse(Console.ReadLine())
+     suma = num1 + num2;
+   End Sub
+End Module

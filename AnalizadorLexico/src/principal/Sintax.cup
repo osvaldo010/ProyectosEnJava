@@ -1,0 +1,44 @@
+package principal;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+
+:};
+
+terminal Linea, End, As, String, Dim, Module, Sub, Int, If, While, Igual, Suma, Resta, Multiplicacion,
+    Division, Signo_Parentesis_Abierto, Signo_Parentesis_Cerrado, Signo_Llave_Abierta, Signo_Llave_Cerrada, Main, Signo_puntoycoma,
+    Identificador, Signo_punto, Signo_Numeral, Else, Signo_Corchete_Abierto, Signo_doblepunto, Signo_Exclamacion_Invertida,
+    Signo_Corchete_Cerrado, Signo_Potencia, Signo_Interrogacion, Signo_Mayor, Signo_Grado, Signo_Menor, Signo_Porcentaje,
+    Op_AND, Signo_Apostrofe, Signo_Interrogacion_Invertida, Integer, Signo_Exclamacion, Signo_Dolar, Signo_Guion_Bajo,
+    Op_OR, Numero, ERROR, Console, WriteLine, ReadKey, ReadLine, Signo_Comillas;
+non terminal INICIO, SENTENCIA, DECLARACION, METODO, VERIFICAR;
+
+start with INICIO;
+
+INICIO ::= Module Identificador End Module | Module Identificador METODO End Module;
+
+METODO ::= Sub Main Signo_Parentesis_Abierto Identificador As String Signo_Corchete_Abierto Signo_Corchete_Cerrado Signo_Parentesis_Cerrado SENTENCIA End Sub;
+
+SENTENCIA ::= If Signo_Parentesis_Abierto VERIFICAR Signo_Parentesis_Cerrado SENTENCIA|
+Dim Identificador As String Igual DECLARACION | Dim Identificador As String Igual DECLARACION SENTENCIA | Console Signo_punto WriteLine 
+Signo_Parentesis_Abierto DECLARACION Signo_Parentesis_Cerrado | 
+Console Signo_punto WriteLine Signo_Parentesis_Abierto DECLARACION Signo_Parentesis_Cerrado SENTENCIA |
+Console Signo_punto ReadKey Signo_Parentesis_Abierto Signo_Parentesis_Cerrado | Console Signo_punto ReadKey Signo_Parentesis_Abierto Signo_Parentesis_Cerrado SENTENCIA
+;
+
+VERIFICAR ::= Numero Signo_Porcentaje Igual Numero;
+
+DECLARACION ::= Signo_Comillas Identificador Signo_Comillas | Console Signo_punto ReadLine Signo_Parentesis_Abierto Signo_Parentesis_Cerrado;
+
+
